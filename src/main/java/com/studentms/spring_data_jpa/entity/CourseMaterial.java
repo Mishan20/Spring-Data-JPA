@@ -28,8 +28,9 @@ public class CourseMaterial {
 
     @OneToOne(
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
-    )
+            fetch = FetchType.LAZY,
+            optional = false
+    ) // This annotation is used to specify the relationship between two entities
     @JoinColumn(
             name = "course_id",
             referencedColumnName = "courseId"
