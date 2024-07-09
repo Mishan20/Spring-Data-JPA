@@ -38,7 +38,7 @@ public class Student {
             nullable = false
     )
     private String emailId;
-    private String guardianName;
-    private String guardianEmail;
-    private String guardianMobile;
+
+    @Embedded // This annotation is used to specify that the entity has an embedded object.
+    private Guardian guardian;
 }
