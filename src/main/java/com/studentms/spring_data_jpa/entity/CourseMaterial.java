@@ -1,16 +1,14 @@
 package com.studentms.spring_data_jpa.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder // This annotation is used to create a builder class for the entity
+@ToString(exclude = "course") // This annotation is used to exclude the course field from the toString method
 public class CourseMaterial {
     @Id // This annotation is used to specify the primary key of an entity
     @SequenceGenerator(
@@ -29,7 +27,8 @@ public class CourseMaterial {
     private String url;
 
     @OneToOne(
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
     )
     @JoinColumn(
             name = "course_id",
