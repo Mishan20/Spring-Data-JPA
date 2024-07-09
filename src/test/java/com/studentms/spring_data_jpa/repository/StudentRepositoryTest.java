@@ -16,15 +16,15 @@ class StudentRepositoryTest {
     @Autowired // This annotation is used to inject the dependency automatically.
     private StudentRepository studentRepository;
 
-    @Test // This annotation is used to indicate that the method is a test method.
-    public void saveStudent(){
+    @Test
+    public void saveStudent() {
         Student student = Student.builder()
-                .emailId("ishan@gmail.com")
-                .firstName("Ishan")
-                .lastName("Senanayaka" )
-                //.guardianName("Nimal Senanayaka")
-                //.guardianEmail("nimal@gmail.com")
-                //.guardianMobile("0771234567")
+                .emailId("shabbir@gmail.com")
+                .firstName("Shabbir")
+                .lastName("Dawoodi")
+                //.guardianName("Nikhil")
+                //.guardianEmail("nikhil@gmail.com")
+                //.guardianMobile("9999999999")
                 .build();
 
         studentRepository.save(student);
@@ -34,15 +34,15 @@ class StudentRepositoryTest {
     public void saveStudentWithGuardian() {
 
         Guardian guardian = Guardian.builder()
-                .email("nikhil@gmail.com")
-                .name("Nikhil")
-                .mobile("9999956324")
+                .email("nimal@gmail.com")
+                .name("Nimal Senanayaka")
+                .mobile("0771234567")
                 .build();
 
         Student student = Student.builder()
-                .firstName("Shivam")
-                .emailId("shivam@gmail.com")
-                .lastName("Kumar")
+                .firstName("Ishan")
+                .emailId("ishan@gmail.com")
+                .lastName("Senanayaka")
                 .guardian(guardian)
                 .build();
 
@@ -62,7 +62,7 @@ class StudentRepositoryTest {
     public void printStudentByFirstName() {
 
         List<Student> students =
-                studentRepository.findByFirstName("shivam");
+                studentRepository.findByFirstName("IShan");
 
         System.out.println("students = " + students);
     }
@@ -79,8 +79,53 @@ class StudentRepositoryTest {
     @Test
     public void printStudentBasedOnGuardianName(){
         List<Student> students =
-                studentRepository.findByGuardianName("Nikhil");
+                studentRepository.findByGuardianName("Nimal");
         System.out.println("students = " + students);
     }
 
+    @Test
+    public void printgetStudentByEmailAddress() {
+        Student student =
+                studentRepository.getStudentByEmailAddress(
+                        "ishan@gmail.com"
+                );
+
+        System.out.println("student = " + student);
+    }
+
+    @Test
+    public void printgetStudentFirstNameByEmailAddress() {
+        String firstName =
+                studentRepository.getStudentFirstNameByEmailAddress(
+                        "ishan@gmail.com"
+                );
+        System.out.println("firstName = " + firstName);
+    }
+
+    @Test
+    public void printgetStudentByEmailAddressNative(){
+        Student student =
+                studentRepository.getStudentByEmailAddressNative(
+                        "ishan@gmail.com"
+                );
+
+        System.out.println("student = " + student);
+    }
+
+    @Test
+    public void printgetStudentByEmailAddressNativeNamedParam() {
+        Student student =
+                studentRepository.getStudentByEmailAddressNativeNamedParam(
+                        "ishan@gmail.com"
+                );
+
+        System.out.println("student = " + student);
+    }
+
+    @Test
+    public void updateStudentNameByEmailIdTest() {
+        studentRepository.updateStudentNameByEmailId(
+                "Maduranga Senanayaka",
+                "ishan@gmail.com");
+    }
 }
